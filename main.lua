@@ -8,6 +8,9 @@ local scene = Scene.new{
 }
 
 local layer = scene:AddLayer(Layer.new("MainLayer", 640, 480)):Properties{
+    Update = function (self, dt)
+        self.ShaderCache.crt:Send("time", Chexcore._clock)
+    end
 }
 
 layer.ShaderCache = {
