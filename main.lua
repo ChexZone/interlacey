@@ -19,6 +19,11 @@ local lacey = Prop.new{
 }:Properties{
     Update = function (self, dt)
         -- self.Rotation = self.Rotation + dt
+
+        if Input:JustPressed("f") then
+            love.window.setFullscreen( not love.window.getFullscreen(), "desktop" )
+        end
+
     end
 }:Into(scene:GetLayer("MainLayer"))
 
