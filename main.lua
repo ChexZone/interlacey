@@ -7,8 +7,14 @@ local scene = Scene.new{
     
 }
 
-scene:AddLayer(Layer.new("MainLayer", 640, 480)):Properties{
+local layer = scene:AddLayer(Layer.new("MainLayer", 640, 480)):Properties{
 }
+
+layer.ShaderCache = {
+    crt = Shader.new("assets/shaders/crt.glsl")
+}
+
+layer.OverlayShaders = {"crt"} -- overlay shader order
 
 local lacey = Prop.new{
     Texture = Texture.new("assets/images/testLacey.png"),
