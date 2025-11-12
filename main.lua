@@ -23,9 +23,10 @@ local lightingLayer = scene:AddLayer(Layer.new("LightLayer", 640, 480)):Properti
 
 lightingLayer.ShaderCache = {
     lighting = Shader.new("assets/shaders/lighting.glsl"):Send("blendRange", 10):Send("aspectRatio", {4,3}),
+    uncurve = Shader.new("assets/shaders/uncurve.glsl"),
 }
 
-lightingLayer.OverlayShaders = {"lighting"} -- overlay shader order
+lightingLayer.OverlayShaders = {"lighting", "uncurve"} -- overlay shader order
 
 local tvLayer = scene:AddLayer(Layer.new("TVLayer", 640, 480)):Properties{
     Update = function (self, dt)
@@ -35,7 +36,7 @@ local tvLayer = scene:AddLayer(Layer.new("TVLayer", 640, 480)):Properties{
 }
 
 tvLayer.ShaderCache = {
-    crt = Shader.new("assets/shaders/crt.glsl")
+    crt = Shader.new("assets/shaders/crt.glsl"),
 }
 
 tvLayer.OverlayShaders = {"crt"} -- overlay shader order
@@ -90,6 +91,7 @@ local lacey = Prop.new{
     AnchorPoint = V{0.5, 0.5},
     Rotation = 0,
 }:Into(scene:GetLayer("TVLayer"))
+
 
 local background = Prop.new{
     Texture = Texture.new{"assets/images/background/albedo.png", specularPath = "assets/images/background/normal.png", shadowPath = "assets/images/background/shadow.png"},
