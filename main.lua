@@ -94,7 +94,7 @@ local lacey = Prop.new{
 local background = Prop.new{
     Texture = Texture.new{"assets/images/background/albedo.png", specularPath = "assets/images/background/normal.png", shadowPath = "assets/images/background/shadow.png"},
     Size = V{640, 480},
-    Color = V{0,0,1,.8},
+    Color = V{0,0,1,.95},
     Position = V{0, 0},
     AnchorPoint = V{0.5, 0.5},
     Rotation = 0,
