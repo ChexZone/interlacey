@@ -3,6 +3,7 @@ local chexcore = require "chexcore"
 local scene = Scene.new{
     Name = "LaceyScene",
     DrawSize = V{640, 480},
+    FrameLimit = 60,
 }:Properties{
     
 }
