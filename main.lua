@@ -112,7 +112,8 @@ local light = LightSource.new():Properties{
     Position = V{0,0},
     Update = function (self, dt)
         -- print("updating light")
-        self.Position = self:GetLayer():GetMousePosition()
+        -- self.Position = self:GetLayer():GetMousePosition()
+        self.Position.X = math.sin(Chexcore._clock*4) * 200
     end
 }:Into(scene:GetLayer("LightLayer"))
 
