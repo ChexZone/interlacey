@@ -6,10 +6,48 @@ extern vec2 resolution;
 extern float curvature = 3.5;
 extern float scanlineIntensity = 0.15;
 extern float vignetteIntensity = 0.3;
-extern float chromaticAberration = 0.03;
+extern float chromaticAberration = 0.0325;
 extern float brightness = 1.5;
 extern float interlaceIntensity = 0.03;
 extern float interlaceSpeed = 60.0;
+extern float staticIntensity = 0.05;
+
+// Random noise function for static effect
+float noise(vec2 uv, float seed) {
+    return fract(sin(dot(uv, vec2(12.9898, 78.233)) + seed) * 43758.5453);
+}
+
+// Generate colored TV static effect - creates RGB noise like analog TV
+vec3 coloredStaticEffect(vec2 uv) {
+    // High-frequency noise that changes every frame
+    vec2 pixelUV = uv * resolution;
+    
+    // Generate separate noise values for each color channel
+    float rNoise = noise(pixelUV, time * 100.0);
+    float gNoise = noise(pixelUV, time * 100.0 + 13.7);
+    float bNoise = noise(pixelUV, time * 100.0 + 27.3);
+    
+    // Add more variation with different frequencies
+    float rNoise2 = noise(pixelUV * 1.3, time * 100.0 + 1.0);
+    float gNoise2 = noise(pixelUV * 1.3, time * 100.0 + 14.7);
+    float bNoise2 = noise(pixelUV * 1.3, time * 100.0 + 28.3);
+    
+    // Combine noises for each channel
+    vec3 colorNoise;
+    colorNoise.r = (rNoise + rNoise2) * 0.5;
+    colorNoise.g = (gNoise + gNoise2) * 0.5;
+    colorNoise.b = (bNoise + bNoise2) * 0.5;
+    
+    // Create intensity mask - some pixels will be brighter (white) while others show color
+    float intensity = noise(pixelUV * 0.7, time * 100.0 + 50.0);
+    
+    // Mix between colored noise and white noise based on intensity
+    // This creates the classic TV static look with white, colored, and dark pixels
+    vec3 whiteNoise = vec3(intensity);
+    colorNoise = mix(colorNoise, whiteNoise, intensity * 0.6);
+    
+    return colorNoise;
+}
 
 // Apply barrel distortion to simulate curved CRT screen
 vec2 curveScreen(vec2 uv) {
@@ -60,6 +98,11 @@ vec3 applyCRTEffects(vec3 color, vec2 uv) {
     
     // Add subtle flicker
     color *= 0.95 + 0.05 * sin(time * 10.0 + uv.y * 100.0);
+    
+    // Add colored TV static - creates RGB noise with white/red/green/blue/purple pixels
+    vec3 staticNoise = coloredStaticEffect(uv);
+    // Map from [0,1] to [-1,1] for both darkening and brightening each channel
+    color += (staticNoise - 0.5) * 2.0 * staticIntensity;
     
     return color;
 }
