@@ -107,14 +107,14 @@ Chexcore:AddType(require"lightSource")
 local light = LightSource.new():Properties{
     Color = V{1,1,1,1},
     Radius = 5,
-    Sharpness = .5,
-    Size = V{300,300},
+    Sharpness = .25,
+    Size = V{350,300},
     AnchorPoint = V{0.5, 0.5},
     Position = V{0,0},
     Update = function (self, dt)
         -- print("updating light")
         -- self.Position = self:GetLayer():GetMousePosition()
-        self.Position.X = math.sin(Chexcore._clock*4) * 200
+        self.Position.X = math.sin(Chexcore._clock) * 200
     end
 }:Into(scene:GetLayer("LightLayer"))
 
