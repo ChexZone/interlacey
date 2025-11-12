@@ -98,12 +98,6 @@ local background = Prop.new{
     Position = V{0, 0},
     AnchorPoint = V{0.5, 0.5},
     Rotation = 0,
-    Update = function (self, dt)
-        print("test")
-        if Input:JustPressed("f") then
-            love.window.setFullscreen( not love.window.getFullscreen(), "desktop" )
-        end
-    end
 }:Into(scene:GetLayer("LightLayer"))
 
 Chexcore:AddType(require"lightSource")
