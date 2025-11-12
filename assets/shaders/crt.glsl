@@ -4,9 +4,9 @@ extern float rotation;
 extern float time;
 extern vec2 resolution;
 extern float curvature = 3.0;
-extern float scanlineIntensity = 0.15;
+extern float scanlineIntensity = 0.25;
 extern float vignetteIntensity = 0.3;
-extern float chromaticAberration = 0.002;
+extern float chromaticAberration = 0.004;
 extern float brightness = 1.5;
 
 // Apply barrel distortion to simulate curved CRT screen
