@@ -6,7 +6,7 @@ extern vec2 resolution;
 extern float curvature = 3.5;
 extern float scanlineIntensity = 0.15;
 extern float vignetteIntensity = 0.3;
-extern float chromaticAberration = 0.004;
+extern float chromaticAberration = 0.03;
 extern float brightness = 1.5;
 extern float interlaceIntensity = 0.03;
 extern float interlaceSpeed = 60.0;
