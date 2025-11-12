@@ -84,7 +84,7 @@ local lacey = Prop.new{
 }:Into(scene:GetLayer("TVLayer"))
 
 local lacey = Prop.new{
-    Texture = Texture.new("assets/images/lacey-face.png"),
+    Texture = Texture.new("assets/images/lacey-face2.png"),
     Size = V{640, 480},
     Position = V{0, 0},
     AnchorPoint = V{0.5, 0.5},
@@ -94,7 +94,7 @@ local lacey = Prop.new{
 local background = Prop.new{
     Texture = Texture.new{"assets/images/background/albedo.png", specularPath = "assets/images/background/normal.png", shadowPath = "assets/images/background/shadow.png"},
     Size = V{640, 480},
-    Color = V{0,0,1,1},
+    Color = V{0,0,1,.8},
     Position = V{0, 0},
     AnchorPoint = V{0.5, 0.5},
     Rotation = 0,
