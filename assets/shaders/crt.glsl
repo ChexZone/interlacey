@@ -3,7 +3,7 @@ uniform sampler2DArray MainTex;
 extern float rotation;
 extern float time;
 extern vec2 resolution;
-extern float curvature = 3.0;
+extern float curvature = 4.0;
 extern float scanlineIntensity = 0.15;
 extern float vignetteIntensity = 0.3;
 extern float chromaticAberration = 0.004;
