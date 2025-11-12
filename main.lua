@@ -83,10 +83,18 @@ local lacey = Prop.new{
     end
 }:Into(scene:GetLayer("TVLayer"))
 
+local lacey = Prop.new{
+    Texture = Texture.new("assets/images/lacey-face.png"),
+    Size = V{640, 480},
+    Position = V{0, 0},
+    AnchorPoint = V{0.5, 0.5},
+    Rotation = 0,
+}:Into(scene:GetLayer("TVLayer"))
+
 local background = Prop.new{
     Texture = Texture.new{"assets/images/background/albedo.png", specularPath = "assets/images/background/normal.png", shadowPath = "assets/images/background/shadow.png"},
     Size = V{640, 480},
-    Color = V{0,0,.3,1},
+    Color = V{0,0,1,1},
     Position = V{0, 0},
     AnchorPoint = V{0.5, 0.5},
     Rotation = 0,
@@ -107,8 +115,8 @@ local light = LightSource.new():Properties{
     AnchorPoint = V{0.5, 0.5},
     Position = V{0,0},
     Update = function (self, dt)
-        print("updating light")
-        self.Position = self:GetLayer():GetMousePosition()
+        -- print("updating light")
+        -- self.Position = self:GetLayer():GetMousePosition()
     end
 }:Into(scene:GetLayer("LightLayer"))
 

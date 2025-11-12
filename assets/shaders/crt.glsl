@@ -4,10 +4,12 @@ extern float rotation;
 extern float time;
 extern vec2 resolution;
 extern float curvature = 3.0;
-extern float scanlineIntensity = 0.25;
+extern float scanlineIntensity = 0.15;
 extern float vignetteIntensity = 0.3;
 extern float chromaticAberration = 0.004;
 extern float brightness = 1.5;
+extern float interlaceIntensity = 0.07;
+extern float interlaceSpeed = 240.0;
 
 // Apply barrel distortion to simulate curved CRT screen
 vec2 curveScreen(vec2 uv) {
@@ -20,8 +22,19 @@ vec2 curveScreen(vec2 uv) {
 
 // Scanline effect
 float scanline(vec2 uv) {
-    float line = sin(uv.y * resolution.y * 3.14159);
+    float line = sin(uv.y * resolution.y * 3.14159 * 0.25);  // 0.5 makes scanlines twice as wide
     return 1.0 - scanlineIntensity * (1.0 - line * line);
+}
+
+// Interlacing effect - alternates between even/odd lines
+float interlace(vec2 uv) {
+    float row = floor(uv.y * resolution.y);
+    float field = mod(floor(time * interlaceSpeed), 2.0);
+    float lineField = mod(row, 2.0);
+    
+    // Darken lines that don't match the current field
+    float intensity = (lineField == field) ? 1.0 : (1.0 - interlaceIntensity);
+    return intensity;
 }
 
 // Vignette effect
@@ -33,6 +46,9 @@ float vignette(vec2 uv) {
 
 // Apply CRT effects to a color
 vec3 applyCRTEffects(vec3 color, vec2 uv) {
+    // Apply interlacing
+    color *= interlace(uv);
+    
     // Apply scanlines
     color *= scanline(uv);
     
