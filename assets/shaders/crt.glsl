@@ -8,8 +8,8 @@ extern float scanlineIntensity = 0.15;
 extern float vignetteIntensity = 0.3;
 extern float chromaticAberration = 0.004;
 extern float brightness = 1.5;
-extern float interlaceIntensity = 0.07;
-extern float interlaceSpeed = 240.0;
+extern float interlaceIntensity = 0.03;
+extern float interlaceSpeed = 60.0;
 
 // Apply barrel distortion to simulate curved CRT screen
 vec2 curveScreen(vec2 uv) {
